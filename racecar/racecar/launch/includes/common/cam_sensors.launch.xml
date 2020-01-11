@@ -1,0 +1,21 @@
+<!-- -*- mode: XML -*- -->
+<launch>
+  <arg name="racecar_version" />
+  <arg name="sensors_config"
+       default="$(find racecar)/config/$(arg racecar_version)/sensors.yaml" />
+
+  <rosparam file="$(arg sensors_config)" command="load" />
+
+  <!-- usb_cam -->
+  <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <param name="video_device" value="/dev/v4l/by-id/usb-HD_Camera_Manufacturer_USB_2.0_Camera-video-index0" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="pixel_format" value="yuyv" />
+    <param name="camera_frame_id" value="usb_cam" />
+    <param name="autoexposure" value="false" />
+    <param name="exposure" value="200" />
+  </node>
+  
+</launch>
+
